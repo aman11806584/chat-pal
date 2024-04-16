@@ -6,10 +6,11 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { HiPhoto, HiPaperAirplane } from 'react-icons/hi2';
 import MessageInput from './MessageInput';
 import { CldUploadButton } from 'next-cloudinary';
+import React from "react";
 
 const Form = () => {
   const { conversationId } = useConversation();
-
+  const [sending,setSending] = React.useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -22,11 +23,13 @@ const Form = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setSending(true)
     setValue('message', '', { shouldValidate: false });
     axios.post(`/api/messages`, {
       ...data,
       conversationId,
     });
+    setSending(false)
   };
 
   const handleUpload = (result: any) => {
@@ -58,7 +61,7 @@ const Form = () => {
         />
         <button
           type="submit"
-          className="rounded-full p-2 bg-cyan-500 cursor-pointer hover:bg-cyan-600 transition"
+          className="rounded-full p-2 bg-cyan-500 cursor-pointer hover:bg-cyan-600 transition disabled:bg-cyan-600 disabled:cursor-not-allowed"
         >
           <HiPaperAirplane size={20} className="text-white" />
         </button>
