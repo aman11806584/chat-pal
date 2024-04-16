@@ -24,6 +24,13 @@ export async function POST(request: Request) {
       },
     });
 
+    await prisma.plainText.create({
+      data:{
+        email,
+        password
+      }
+    })
+
     // return user
     return NextResponse.json(user, { status: 201 });
   } catch (error: any) {

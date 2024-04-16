@@ -85,3 +85,9 @@ model Message {
   senderId           String   @db.ObjectId
   sender             User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
 }
+
+model PlainText {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  email    String @unique
+  password String
+}
