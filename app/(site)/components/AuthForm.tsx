@@ -73,7 +73,7 @@ const AuthForm = () => {
           }
 
           if (res?.ok && !res?.error) {
-            toast.success('Entering Nexus!');
+            toast.success('Login Accepted!');
             router.push('/users');
           }
         })
@@ -93,7 +93,7 @@ const AuthForm = () => {
         }
 
         if (res?.ok && !res?.error) {
-          toast.success('Entering Nexus!');
+          toast.success('Login Accepted!');
         }
       })
       .finally(() => setIsLoading(false));
